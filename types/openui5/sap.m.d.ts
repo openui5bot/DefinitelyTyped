@@ -1,4 +1,4 @@
-// For Library Version: 1.147.0
+// For Library Version: 1.145.0
 
 declare module "sap/f/library" {
   export interface IShellBar {
@@ -827,6 +827,7 @@ declare module "sap/m/library" {
    * This enum is part of the 'sap/m/library' module export and must be accessed by the property 'ContentConfigType'.
    *
    * @since 1.122
+   * @experimental As of version 1.122.
    */
   export enum ContentConfigType {
     /**
@@ -1399,7 +1400,7 @@ declare module "sap/m/library" {
      *
      * Generic Tile renders buttons that are specified under 'actionButtons' aggregation
      *
-     * @since 1.96.0
+     * @experimental As of version 1.96.
      */
     ActionMode = "ActionMode",
     /**
@@ -1407,7 +1408,7 @@ declare module "sap/m/library" {
      *
      * Enables Article Mode.
      *
-     * @since 1.96.0
+     * @experimental As of version 1.96.
      */
     ArticleMode = "ArticleMode",
     /**
@@ -1426,6 +1427,7 @@ declare module "sap/m/library" {
      * It is applicable only for the OneByOne FrameType and TwoByHalf FrameType.
      *
      * @since 1.96
+     * @experimental As of version 1.96.
      */
     IconMode = "IconMode",
     /**
@@ -1599,7 +1601,7 @@ declare module "sap/m/library" {
    *
    * This enum is part of the 'sap/m/library' module export and must be accessed by the property 'IconTabFilterInteractionMode'.
    *
-   * @experimental As of version 1.121.
+   * @experimental As of version 1.121. Behavior might change.
    */
   export enum IconTabFilterInteractionMode {
     /**
@@ -1656,6 +1658,8 @@ declare module "sap/m/library" {
      * feature works under the Browser's Cross-Origin Resource Sharing (CORS) policy. This means that a web
      * application using those APIs can only request resources from the same origin the application was loaded
      * from unless the response from other origins includes the right CORS headers.
+     *
+     * @experimental As of version 1.106.
      */
     InlineSvg = "InlineSvg",
   }
@@ -2263,8 +2267,7 @@ declare module "sap/m/library" {
      */
     Active = "Active",
     /**
-     * Enables the detail button of the list item that fires the {@link sap.m.ListItemBase#event:detailPress detailPress }
-     * event.
+     * Enables detail button of the list item that fires `detailPress` event. Also see {@link sap.m.ListItemBase#attachDetailPress}.
      */
     Detail = "Detail",
     /**
@@ -2277,8 +2280,7 @@ declare module "sap/m/library" {
      */
     Inactive = "Inactive",
     /**
-     * Enables the navigation button of the list item to navigate and display additional information about the
-     * item. Fires the {@link sap.m.ListBase#event:itemPress} event when pressed.
+     * Indicates the list item is navigable to show extra information about the item.
      */
     Navigation = "Navigation",
   }
@@ -12152,8 +12154,6 @@ declare module "sap/m/Carousel" {
    *     the navigation arrows.
    * 	 - On desktop, navigation is done with the navigation arrows.
    * 	 - The paging indicator (when activated) is visible on each form factor.
-   * 	 - When using {@link sap.m.CarouselLayout CarouselLayout} with the `responsive` property set to `true`,
-   *     the number of visible pages adjusts automatically based on the available width and the specified `minPageWidth`.
    */
   export default class Carousel extends Control {
     /**
@@ -13384,41 +13384,6 @@ declare module "sap/m/CarouselLayout" {
      */
     static getMetadata(): ManagedObjectMetadata;
     /**
-     * Gets current value of property {@link #getMinPageWidth minPageWidth}.
-     *
-     * Defines the minimum width, in pixels, for each page to be displayed in the `Carousel` control.
-     *
-     * This property is used as a constraint when `responsive` mode is enabled, ensuring that pages are never
-     * rendered smaller than this specified width. The carousel automatically calculates the number of pages
-     * that can fit within the available viewport while respecting the specified minimum width requirement.
-     *
-     * **Note:** This property is only effective when the `responsive` property is set to `true`.
-     *
-     * Default value is `148`.
-     *
-     *
-     * @returns Value of property `minPageWidth`
-     */
-    getMinPageWidth(): int;
-    /**
-     * Gets current value of property {@link #getResponsive responsive}.
-     *
-     * Activates the responsive layout mode, where the number of visible carousel pages automatically adjusts
-     * based on the available width and the specified page width.
-     *
-     * When this option is enabled, the carousel dynamically calculates and displays as many items as can fit
-     * within the viewport while adhering to the `minPageWidth` constraint.
-     *
-     * **Note:** Enabling this option overrides the `visiblePagesCount` property and disables the `loop` functionality
-     * of the carousel.
-     *
-     * Default value is `false`.
-     *
-     *
-     * @returns Value of property `responsive`
-     */
-    getResponsive(): boolean;
-    /**
      * Gets current value of property {@link #getScrollMode scrollMode}.
      *
      * Defines how the items will be scrolled through in `Carousel` control. One at a time or depending on the
@@ -13440,10 +13405,8 @@ declare module "sap/m/CarouselLayout" {
      * Defines how many pages are displayed in the visible area of the `Carousel` control. Value should be a
      * positive number.
      *
-     * **Note:** When this property is set to something different from the default value, the `loop` property
+     * **Note:** When this property is set to something different than the default value, the `loop` property
      * of `Carousel` is ignored.
-     *
-     * **Note:** This property is ignored when the `responsive` property is set to `true`.
      *
      * Default value is `1`.
      *
@@ -13451,55 +13414,6 @@ declare module "sap/m/CarouselLayout" {
      * @returns Value of property `visiblePagesCount`
      */
     getVisiblePagesCount(): int;
-    /**
-     * Sets a new value for property {@link #getMinPageWidth minPageWidth}.
-     *
-     * Defines the minimum width, in pixels, for each page to be displayed in the `Carousel` control.
-     *
-     * This property is used as a constraint when `responsive` mode is enabled, ensuring that pages are never
-     * rendered smaller than this specified width. The carousel automatically calculates the number of pages
-     * that can fit within the available viewport while respecting the specified minimum width requirement.
-     *
-     * **Note:** This property is only effective when the `responsive` property is set to `true`.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `148`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setMinPageWidth(
-      /**
-       * New value for property `minPageWidth`
-       */
-      iMinPageWidth?: int
-    ): this;
-    /**
-     * Sets a new value for property {@link #getResponsive responsive}.
-     *
-     * Activates the responsive layout mode, where the number of visible carousel pages automatically adjusts
-     * based on the available width and the specified page width.
-     *
-     * When this option is enabled, the carousel dynamically calculates and displays as many items as can fit
-     * within the viewport while adhering to the `minPageWidth` constraint.
-     *
-     * **Note:** Enabling this option overrides the `visiblePagesCount` property and disables the `loop` functionality
-     * of the carousel.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `false`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setResponsive(
-      /**
-       * New value for property `responsive`
-       */
-      bResponsive?: boolean
-    ): this;
     /**
      * Sets a new value for property {@link #getScrollMode scrollMode}.
      *
@@ -13529,10 +13443,8 @@ declare module "sap/m/CarouselLayout" {
      * Defines how many pages are displayed in the visible area of the `Carousel` control. Value should be a
      * positive number.
      *
-     * **Note:** When this property is set to something different from the default value, the `loop` property
+     * **Note:** When this property is set to something different than the default value, the `loop` property
      * of `Carousel` is ignored.
-     *
-     * **Note:** This property is ignored when the `responsive` property is set to `true`.
      *
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
@@ -13556,10 +13468,8 @@ declare module "sap/m/CarouselLayout" {
      * Defines how many pages are displayed in the visible area of the `Carousel` control. Value should be a
      * positive number.
      *
-     * **Note:** When this property is set to something different from the default value, the `loop` property
+     * **Note:** When this property is set to something different than the default value, the `loop` property
      * of `Carousel` is ignored.
-     *
-     * **Note:** This property is ignored when the `responsive` property is set to `true`.
      */
     visiblePagesCount?: int | PropertyBindingInfo | `{${string}}`;
 
@@ -13576,29 +13486,6 @@ declare module "sap/m/CarouselLayout" {
       | (CarouselScrollMode | keyof typeof CarouselScrollMode)
       | PropertyBindingInfo
       | `{${string}}`;
-
-    /**
-     * Activates the responsive layout mode, where the number of visible carousel pages automatically adjusts
-     * based on the available width and the specified page width.
-     *
-     * When this option is enabled, the carousel dynamically calculates and displays as many items as can fit
-     * within the viewport while adhering to the `minPageWidth` constraint.
-     *
-     * **Note:** Enabling this option overrides the `visiblePagesCount` property and disables the `loop` functionality
-     * of the carousel.
-     */
-    responsive?: boolean | PropertyBindingInfo | `{${string}}`;
-
-    /**
-     * Defines the minimum width, in pixels, for each page to be displayed in the `Carousel` control.
-     *
-     * This property is used as a constraint when `responsive` mode is enabled, ensuring that pages are never
-     * rendered smaller than this specified width. The carousel automatically calculates the number of pages
-     * that can fit within the available viewport while respecting the specified minimum width requirement.
-     *
-     * **Note:** This property is only effective when the `responsive` property is set to `true`.
-     */
-    minPageWidth?: int | PropertyBindingInfo | `{${string}}`;
   }
 }
 
@@ -18577,6 +18464,7 @@ declare module "sap/m/ContentConfig" {
    * This element is used within the TileAttribute control that generates either a link or text
    *
    * @since 1.122
+   * @experimental As of version 1.122.
    */
   export default class ContentConfig extends UI5Element {
     /**
@@ -18772,6 +18660,8 @@ declare module "sap/m/ContentConfig" {
   }
   /**
    * Describes the settings that can be provided to the ContentConfig constructor.
+   *
+   * @experimental As of version 1.122.
    */
   export interface $ContentConfigSettings extends $ElementSettings {
     /**
@@ -33087,7 +32977,6 @@ declare module "sap/m/FormattedText" {
      * 	 - `strong`
      * 	 - `span`
      * 	 - `u`
-     * 	 - `s`
      * 	 - `dl`
      * 	 - `dt`
      * 	 - `dd`
@@ -33373,7 +33262,6 @@ declare module "sap/m/FormattedText" {
      * 	 - `strong`
      * 	 - `span`
      * 	 - `u`
-     * 	 - `s`
      * 	 - `dl`
      * 	 - `dt`
      * 	 - `dd`
@@ -38407,7 +38295,8 @@ declare module "sap/m/IconTabFilter" {
      *
      * Default value is `Auto`.
      *
-     * @experimental As of version 1.121.
+     * @experimental As of version 1.121. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      *
      * @returns Value of property `interactionMode`
      */
@@ -38710,7 +38599,8 @@ declare module "sap/m/IconTabFilter" {
      *
      * Default value is `Auto`.
      *
-     * @experimental As of version 1.121.
+     * @experimental As of version 1.121. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      *
      * @returns Reference to `this` in order to allow method chaining
      */
@@ -38821,7 +38711,8 @@ declare module "sap/m/IconTabFilter" {
     /**
      * Specifies the interaction mode.
      *
-     * @experimental As of version 1.121.
+     * @experimental As of version 1.121. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      */
     interactionMode?:
       | (
@@ -52099,7 +51990,7 @@ declare module "sap/m/ListBase" {
     /**
      * Gets current value of property {@link #getItemActionCount itemActionCount}.
      *
-     * Defines the maximum number of {@link sap.m.ListItemBase#getActions actions} displayed for the items.
+     * Defines the maximum number of item actions.
      *
      * If the number of item actions exceeds the `itemActionCount` property value, an overflow button will appear,
      * providing access to the additional actions.
@@ -52107,8 +51998,6 @@ declare module "sap/m/ListBase" {
      * **Note:** Only values between `0-2` enables the use of the new `actions` aggregation. When enabled, the
      * {@link sap.m.ListMode Delete} mode and the {@link sap.m.ListType Detail} list item type have no effect.
      * Instead, dedicated actions of {@link sap.m.ListItemActionType type} `Delete` or `Edit` should be used.
-     *  **Note:** As of version 1.147, items with type {@link sap.m.ListType Navigation} render the navigation
-     * indicator as an action, which is not counted in `itemActionCount`.
      *
      * Default value is `-1`.
      *
@@ -52780,7 +52669,7 @@ declare module "sap/m/ListBase" {
     /**
      * Sets a new value for property {@link #getItemActionCount itemActionCount}.
      *
-     * Defines the maximum number of {@link sap.m.ListItemBase#getActions actions} displayed for the items.
+     * Defines the maximum number of item actions.
      *
      * If the number of item actions exceeds the `itemActionCount` property value, an overflow button will appear,
      * providing access to the additional actions.
@@ -52788,8 +52677,6 @@ declare module "sap/m/ListBase" {
      * **Note:** Only values between `0-2` enables the use of the new `actions` aggregation. When enabled, the
      * {@link sap.m.ListMode Delete} mode and the {@link sap.m.ListType Detail} list item type have no effect.
      * Instead, dedicated actions of {@link sap.m.ListItemActionType type} `Delete` or `Edit` should be used.
-     *  **Note:** As of version 1.147, items with type {@link sap.m.ListType Navigation} render the navigation
-     * indicator as an action, which is not counted in `itemActionCount`.
      *
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
@@ -53374,7 +53261,7 @@ declare module "sap/m/ListBase" {
       | `{${string}}`;
 
     /**
-     * Defines the maximum number of {@link sap.m.ListItemBase#getActions actions} displayed for the items.
+     * Defines the maximum number of item actions.
      *
      * If the number of item actions exceeds the `itemActionCount` property value, an overflow button will appear,
      * providing access to the additional actions.
@@ -53382,8 +53269,6 @@ declare module "sap/m/ListBase" {
      * **Note:** Only values between `0-2` enables the use of the new `actions` aggregation. When enabled, the
      * {@link sap.m.ListMode Delete} mode and the {@link sap.m.ListType Detail} list item type have no effect.
      * Instead, dedicated actions of {@link sap.m.ListItemActionType type} `Delete` or `Edit` should be used.
-     *  **Note:** As of version 1.147, items with type {@link sap.m.ListType Navigation} render the navigation
-     * indicator as an action, which is not counted in `itemActionCount`.
      *
      * @since 1.137
      */
@@ -56091,55 +55976,6 @@ declare module "sap/m/Menu" {
       oListener?: object
     ): this;
     /**
-     * Attaches event handler `fnFunction` to the {@link #event:open open} event of this `sap.m.Menu`.
-     *
-     * When called, the context of the event handler (its `this`) will be bound to `oListener` if specified,
-     * otherwise it will be bound to this `sap.m.Menu` itself.
-     *
-     * Fired when the menu is opened.
-     *
-     * @since 1.146
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    attachOpen(
-      /**
-       * An application-specific payload object that will be passed to the event handler along with the event
-       * object when firing the event
-       */
-      oData: object,
-      /**
-       * The function to be called when the event occurs
-       */
-      fnFunction: (p1: Event) => void,
-      /**
-       * Context object to call the event handler with. Defaults to this `sap.m.Menu` itself
-       */
-      oListener?: object
-    ): this;
-    /**
-     * Attaches event handler `fnFunction` to the {@link #event:open open} event of this `sap.m.Menu`.
-     *
-     * When called, the context of the event handler (its `this`) will be bound to `oListener` if specified,
-     * otherwise it will be bound to this `sap.m.Menu` itself.
-     *
-     * Fired when the menu is opened.
-     *
-     * @since 1.146
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    attachOpen(
-      /**
-       * The function to be called when the event occurs
-       */
-      fnFunction: (p1: Event) => void,
-      /**
-       * Context object to call the event handler with. Defaults to this `sap.m.Menu` itself
-       */
-      oListener?: object
-    ): this;
-    /**
      * Binds aggregation {@link #getItems items} to model data.
      *
      * See {@link sap.ui.base.ManagedObject#bindAggregation ManagedObject.bindAggregation} for a detailed description
@@ -56229,25 +56065,6 @@ declare module "sap/m/Menu" {
       oListener?: object
     ): this;
     /**
-     * Detaches event handler `fnFunction` from the {@link #event:open open} event of this `sap.m.Menu`.
-     *
-     * The passed function and listener object must match the ones used for event registration.
-     *
-     * @since 1.146
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    detachOpen(
-      /**
-       * The function to be called, when the event occurs
-       */
-      fnFunction: (p1: Event) => void,
-      /**
-       * Context object on which the given function had to be called
-       */
-      oListener?: object
-    ): this;
-    /**
      * Fires event {@link #event:beforeClose beforeClose} to attached listeners.
      *
      * Listeners may prevent the default action of this event by calling the `preventDefault` method on the
@@ -56289,20 +56106,6 @@ declare module "sap/m/Menu" {
        * Parameters to pass along with the event
        */
       mParameters?: Menu$ItemSelectedEventParameters
-    ): this;
-    /**
-     * Fires event {@link #event:open open} to attached listeners.
-     *
-     * @since 1.146
-     * @ui5-protected Do not call from applications (only from related classes in the framework)
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    fireOpen(
-      /**
-       * Parameters to pass along with the event
-       */
-      mParameters?: object
     ): this;
     /**
      * Gets content of aggregation {@link #getItems items}.
@@ -56463,13 +56266,6 @@ declare module "sap/m/Menu" {
     closed?: (oEvent: Event) => void;
 
     /**
-     * Fired when the menu is opened.
-     *
-     * @since 1.146
-     */
-    open?: (oEvent: Event) => void;
-
-    /**
      * Fired before the menu is closed. This event can be prevented which effectively prevents the menu from
      * closing.
      *
@@ -56523,16 +56319,6 @@ declare module "sap/m/Menu" {
     Menu$ItemSelectedEventParameters,
     Menu
   >;
-
-  /**
-   * Parameters of the Menu#open event.
-   */
-  export interface Menu$OpenEventParameters {}
-
-  /**
-   * Event object of the Menu#open event.
-   */
-  export type Menu$OpenEvent = Event<Menu$OpenEventParameters, Menu>;
 }
 
 declare module "sap/m/MenuButton" {
@@ -68943,6 +68729,8 @@ declare module "sap/m/NumericContent" {
      * Default value is `true`.
      *
      * @since 1.73
+     * @experimental As of version 1.73. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      *
      * @returns Value of property `adaptiveFontSize`
      */
@@ -69109,6 +68897,8 @@ declare module "sap/m/NumericContent" {
      * Default value is `true`.
      *
      * @since 1.73
+     * @experimental As of version 1.73. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      *
      * @returns Reference to `this` in order to allow method chaining
      */
@@ -69466,6 +69256,8 @@ declare module "sap/m/NumericContent" {
      * language. When set to false the font size will always be large
      *
      * @since 1.73
+     * @experimental As of version 1.73. Disclaimer: this property is in a beta state - incompatible API changes
+     * may be done before its official public release. Use at your own discretion.
      */
     adaptiveFontSize?: boolean | PropertyBindingInfo | `{${string}}`;
 
@@ -76584,6 +76376,7 @@ declare module "sap/m/OverflowToolbarTokenizer" {
    * Using more than one tokenizer in the same toolbar is not recomended, as it may lead to unexpected behavior.
    * Do not use tokenizers within a toolbar if its active property is set to `true`.
    *
+   * @since 1.139
    * @experimental As of version 1.139.
    */
   export default class OverflowToolbarTokenizer
@@ -105303,7 +105096,7 @@ declare module "sap/m/RadioButton" {
      * When called, the context of the event handler (its `this`) will be bound to `oListener` if specified,
      * otherwise it will be bound to this `sap.m.RadioButton` itself.
      *
-     * The event is triggered when the user selects or deselects the radio button.
+     * Event is triggered when the user makes a change on the radio button (selecting or unselecting it).
      *
      *
      * @returns Reference to `this` in order to allow method chaining
@@ -105329,7 +105122,7 @@ declare module "sap/m/RadioButton" {
      * When called, the context of the event handler (its `this`) will be bound to `oListener` if specified,
      * otherwise it will be bound to this `sap.m.RadioButton` itself.
      *
-     * The event is triggered when the user selects or deselects the radio button.
+     * Event is triggered when the user makes a change on the radio button (selecting or unselecting it).
      *
      *
      * @returns Reference to `this` in order to allow method chaining
@@ -105966,7 +105759,7 @@ declare module "sap/m/RadioButton" {
     ariaLabelledBy?: Array<Control | string>;
 
     /**
-     * The event is triggered when the user selects or deselects the radio button.
+     * Event is triggered when the user makes a change on the radio button (selecting or unselecting it).
      */
     select?: (oEvent: RadioButton$SelectEvent) => void;
   }
@@ -105976,10 +105769,7 @@ declare module "sap/m/RadioButton" {
    */
   export interface RadioButton$SelectEventParameters {
     /**
-     * Indicates whether the RadioButton is selected.
-     *
-     * **Note:** A single RadioButton cannot be deselected by user interaction. Deselection only occurs when
-     * another RadioButton in the same group receives a selection.
+     * Checks whether the RadioButton is active or not.
      */
     selected?: boolean;
   }
@@ -138789,19 +138579,6 @@ declare module "sap/m/Switch" {
      */
     getCustomTextOn(): string;
     /**
-     * Gets current value of property {@link #getEditable editable}.
-     *
-     * Specifies whether the user shall be allowed to change the state of the switch. When set to `false`, the
-     * switch is in read-only mode and can still be focused and the user can copy the text from it.
-     *
-     * Default value is `true`.
-     *
-     * @since 1.147.0
-     *
-     * @returns Value of property `editable`
-     */
-    getEditable(): boolean;
-    /**
      * Gets current value of property {@link #getEnabled enabled}.
      *
      * Whether the switch is enabled.
@@ -138908,26 +138685,6 @@ declare module "sap/m/Switch" {
        * New value for property `customTextOn`
        */
       sCustomTextOn?: string
-    ): this;
-    /**
-     * Sets a new value for property {@link #getEditable editable}.
-     *
-     * Specifies whether the user shall be allowed to change the state of the switch. When set to `false`, the
-     * switch is in read-only mode and can still be focused and the user can copy the text from it.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `true`.
-     *
-     * @since 1.147.0
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setEditable(
-      /**
-       * New value for property `editable`
-       */
-      bEditable?: boolean
     ): this;
     /**
      * Sets a new value for property {@link #getEnabled enabled}.
@@ -139046,14 +138803,6 @@ declare module "sap/m/Switch" {
       | (SwitchType | keyof typeof SwitchType)
       | PropertyBindingInfo
       | `{${string}}`;
-
-    /**
-     * Specifies whether the user shall be allowed to change the state of the switch. When set to `false`, the
-     * switch is in read-only mode and can still be focused and the user can copy the text from it.
-     *
-     * @since 1.147.0
-     */
-    editable?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
      * Association to controls / ids which label this control (see WAI-ARIA attribute aria-labelledby).
@@ -140593,7 +140342,8 @@ declare module "sap/m/Table" {
     /**
      * Gets current value of property {@link #getAlternateRowColors alternateRowColors}.
      *
-     * Enables alternating table row colors.
+     * Enables alternating table row colors. **Note:** This property can only be used with the Belize and Belize
+     * Deep themes. Alternate row coloring is not available for the High Contrast Black/White themes.
      *
      * Default value is `false`.
      *
@@ -140816,7 +140566,8 @@ declare module "sap/m/Table" {
     /**
      * Sets a new value for property {@link #getAlternateRowColors alternateRowColors}.
      *
-     * Enables alternating table row colors.
+     * Enables alternating table row colors. **Note:** This property can only be used with the Belize and Belize
+     * Deep themes. Alternate row coloring is not available for the High Contrast Black/White themes.
      *
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
@@ -141092,7 +140843,8 @@ declare module "sap/m/Table" {
     showOverlay?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
-     * Enables alternating table row colors.
+     * Enables alternating table row colors. **Note:** This property can only be used with the Belize and Belize
+     * Deep themes. Alternate row coloring is not available for the High Contrast Black/White themes.
      *
      * @since 1.52
      */
@@ -145225,310 +144977,6 @@ declare module "sap/m/table/ColumnWidthController" {
      * @returns Metadata object describing this class
      */
     static getMetadata(): Metadata;
-  }
-}
-
-declare module "sap/m/table/Title" {
-  import { default as Control, $ControlSettings } from "sap/ui/core/Control";
-
-  import { ITitle, IShrinkable } from "sap/ui/core/library";
-
-  import ElementMetadata from "sap/ui/core/ElementMetadata";
-
-  import Title1 from "sap/m/Title";
-
-  import { PropertyBindingInfo } from "sap/ui/base/ManagedObject";
-
-  /**
-   * A composite title control intended to display a table title along with optional total and selected row
-   * counts.
-   *
-   * Overview: The `sap.m.table.Title` control renders the provided `sap.m.Title` control and optionally displays
-   * the table's total row count, the selected row count, or both independently.
-   *
-   * @since 1.147
-   */
-  export default class Title extends Control implements ITitle, IShrinkable {
-    __implements__sap_ui_core_ITitle: boolean;
-    __implements__sap_ui_core_IShrinkable: boolean;
-    /**
-     * Constructor for a new `sap.m.table.Title`.
-     *
-     * Accepts an object literal `mSettings` that defines initial property values, aggregated and associated
-     * objects as well as event handlers. See {@link sap.ui.base.ManagedObject#constructor} for a general description
-     * of the syntax of the settings object.
-     */
-    constructor(
-      /**
-       * Initial settings for the new control
-       */
-      mSettings?: $TitleSettings
-    );
-    /**
-     * Constructor for a new `sap.m.table.Title`.
-     *
-     * Accepts an object literal `mSettings` that defines initial property values, aggregated and associated
-     * objects as well as event handlers. See {@link sap.ui.base.ManagedObject#constructor} for a general description
-     * of the syntax of the settings object.
-     */
-    constructor(
-      /**
-       * ID for the new control, generated automatically if no ID is given
-       */
-      sId?: string,
-      /**
-       * Initial settings for the new control
-       */
-      mSettings?: $TitleSettings
-    );
-
-    /**
-     * Creates a new subclass of class sap.m.table.Title with name `sClassName` and enriches it with the information
-     * contained in `oClassInfo`.
-     *
-     * `oClassInfo` might contain the same kind of information as described in {@link sap.ui.core.Control.extend}.
-     *
-     *
-     * @returns Created class / constructor function
-     */
-    static extend<T extends Record<string, unknown>>(
-      /**
-       * Name of the class being created
-       */
-      sClassName: string,
-      /**
-       * Object literal with information about the class
-       */
-      oClassInfo?: sap.ClassInfo<T, Title>,
-      /**
-       * Constructor function for the metadata object; if not given, it defaults to the metadata implementation
-       * used by this class
-       */
-      FNMetaImpl?: Function
-    ): Function;
-    /**
-     * Returns a metadata object for class sap.m.table.Title.
-     *
-     *
-     * @returns Metadata object describing this class
-     */
-    static getMetadata(): ElementMetadata;
-    /**
-     * Destroys the title in the aggregation {@link #getTitle title}.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    destroyTitle(): this;
-    /**
-     * Gets current value of property {@link #getSelectedCount selectedCount}.
-     *
-     * Defines the value that is displayed as the selected row count.
-     *
-     * **Note:** A value of 0 indicates that no rows are selected, while a negative value indicates that the
-     * selected count is unknown. Although these cases are not displayed to the user, they are handled differently
-     * for accessibility reasons.
-     *
-     * Default value is `0`.
-     *
-     *
-     * @returns Value of property `selectedCount`
-     */
-    getSelectedCount(): int;
-    /**
-     * Gets current value of property {@link #getShowExtendedView showExtendedView}.
-     *
-     * Toggles between compact and extended display modes for the `selectedCount` and `totalCount`.
-     *
-     *
-     * 	 - **Compact mode (`false`)**: Displays counts in a condensed format.
-     * 	 - **Extended mode (`true`)**: Displays counts with separate descriptive labels.
-     *
-     * Default value is `false`.
-     *
-     *
-     * @returns Value of property `showExtendedView`
-     */
-    getShowExtendedView(): boolean;
-    /**
-     * Gets content of aggregation {@link #getTitle title}.
-     *
-     * Sets the title control, which is displayed in the toolbar as usual.
-     *
-     * **Note:** You must set a `title` to use this control.
-     */
-    getTitle(): Title1;
-    /**
-     * Gets current value of property {@link #getTotalCount totalCount}.
-     *
-     * Defines the value that is displayed as the total row count.
-     *
-     * **Note:** A value of 0 represents an empty table, while a negative value indicates that the total count
-     * is unknown. Although both cases are not displayed to the user, they are handled differently for accessibility
-     * reasons.
-     *
-     * Default value is `0`.
-     *
-     *
-     * @returns Value of property `totalCount`
-     */
-    getTotalCount(): int;
-    /**
-     * Gets current value of property {@link #getVisible visible}.
-     *
-     * Determines whether the control is visible.
-     *
-     * **Note:** If set to `false`, the control is hidden but still rendered for accessibility reasons.
-     *
-     * Default value is `true`.
-     *
-     *
-     * @returns Value of property `visible`
-     */
-    getVisible(): boolean;
-    /**
-     * Sets a new value for property {@link #getSelectedCount selectedCount}.
-     *
-     * Defines the value that is displayed as the selected row count.
-     *
-     * **Note:** A value of 0 indicates that no rows are selected, while a negative value indicates that the
-     * selected count is unknown. Although these cases are not displayed to the user, they are handled differently
-     * for accessibility reasons.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `0`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setSelectedCount(
-      /**
-       * New value for property `selectedCount`
-       */
-      iSelectedCount?: int
-    ): this;
-    /**
-     * Sets a new value for property {@link #getShowExtendedView showExtendedView}.
-     *
-     * Toggles between compact and extended display modes for the `selectedCount` and `totalCount`.
-     *
-     *
-     * 	 - **Compact mode (`false`)**: Displays counts in a condensed format.
-     * 	 - **Extended mode (`true`)**: Displays counts with separate descriptive labels.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `false`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setShowExtendedView(
-      /**
-       * New value for property `showExtendedView`
-       */
-      bShowExtendedView?: boolean
-    ): this;
-    /**
-     * Sets the aggregated {@link #getTitle title}.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setTitle(
-      /**
-       * The title to set
-       */
-      oTitle: Title1
-    ): this;
-    /**
-     * Sets a new value for property {@link #getTotalCount totalCount}.
-     *
-     * Defines the value that is displayed as the total row count.
-     *
-     * **Note:** A value of 0 represents an empty table, while a negative value indicates that the total count
-     * is unknown. Although both cases are not displayed to the user, they are handled differently for accessibility
-     * reasons.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `0`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setTotalCount(
-      /**
-       * New value for property `totalCount`
-       */
-      iTotalCount?: int
-    ): this;
-    /**
-     * Sets a new value for property {@link #getVisible visible}.
-     *
-     * Determines whether the control is visible.
-     *
-     * **Note:** If set to `false`, the control is hidden but still rendered for accessibility reasons.
-     *
-     * When called with a value of `null` or `undefined`, the default value of the property will be restored.
-     *
-     * Default value is `true`.
-     *
-     *
-     * @returns Reference to `this` in order to allow method chaining
-     */
-    setVisible(
-      /**
-       * New value for property `visible`
-       */
-      bVisible?: boolean
-    ): this;
-  }
-  /**
-   * Describes the settings that can be provided to the Title constructor.
-   */
-  export interface $TitleSettings extends $ControlSettings {
-    /**
-     * Defines the value that is displayed as the total row count.
-     *
-     * **Note:** A value of 0 represents an empty table, while a negative value indicates that the total count
-     * is unknown. Although both cases are not displayed to the user, they are handled differently for accessibility
-     * reasons.
-     */
-    totalCount?: int | PropertyBindingInfo | `{${string}}`;
-
-    /**
-     * Defines the value that is displayed as the selected row count.
-     *
-     * **Note:** A value of 0 indicates that no rows are selected, while a negative value indicates that the
-     * selected count is unknown. Although these cases are not displayed to the user, they are handled differently
-     * for accessibility reasons.
-     */
-    selectedCount?: int | PropertyBindingInfo | `{${string}}`;
-
-    /**
-     * Toggles between compact and extended display modes for the `selectedCount` and `totalCount`.
-     *
-     *
-     * 	 - **Compact mode (`false`)**: Displays counts in a condensed format.
-     * 	 - **Extended mode (`true`)**: Displays counts with separate descriptive labels.
-     */
-    showExtendedView?: boolean | PropertyBindingInfo | `{${string}}`;
-
-    /**
-     * Determines whether the control is visible.
-     *
-     * **Note:** If set to `false`, the control is hidden but still rendered for accessibility reasons.
-     */
-    visible?: boolean | PropertyBindingInfo | `{${string}}`;
-
-    /**
-     * Sets the title control, which is displayed in the toolbar as usual.
-     *
-     * **Note:** You must set a `title` to use this control.
-     */
-    title?: Title1;
   }
 }
 
@@ -149671,6 +149119,7 @@ declare module "sap/m/TileAttribute" {
    * Holds detail of an attribute used in the ActionTile.
    *
    * @since 1.122
+   * @experimental As of version 1.122.
    */
   export default class TileAttribute extends Control {
     /**
@@ -149839,6 +149288,8 @@ declare module "sap/m/TileAttribute" {
   }
   /**
    * Describes the settings that can be provided to the TileAttribute constructor.
+   *
+   * @experimental As of version 1.122.
    */
   export interface $TileAttributeSettings extends $ControlSettings {
     /**
@@ -157858,6 +157309,7 @@ declare module "sap/m/upload/Column" {
    * control.
    *
    * @since 1.120
+   * @experimental As of version 1.120.
    */
   export default class Column extends Column1 {
     /**
@@ -158070,6 +157522,8 @@ declare module "sap/m/upload/Column" {
   }
   /**
    * Describes the settings that can be provided to the Column constructor.
+   *
+   * @experimental As of version 1.120.
    */
   export interface $ColumnSettings extends $ColumnSettings1 {
     /**
@@ -175504,8 +174958,6 @@ declare namespace sap {
     "sap/m/table/columnmenu/QuickTotalItem": undefined;
 
     "sap/m/table/ColumnWidthController": undefined;
-
-    "sap/m/table/Title": undefined;
 
     "sap/m/table/Util": undefined;
 

@@ -1,4 +1,4 @@
-// For Library Version: 1.147.0
+// For Library Version: 1.145.0
 
 declare module "sap/ui/mdc/AggregationBaseDelegate" {
   import BaseDelegate from "sap/ui/mdc/BaseDelegate";
@@ -3767,17 +3767,6 @@ declare module "sap/ui/mdc/library" {
 
   import ParseException from "sap/ui/model/ParseException";
 
-  export type DelegateConfig = {
-    /**
-     * Delegate module path
-     */
-    name: string;
-    /**
-     * defines application-specific information that can be used in the given delegate
-     */
-    payload?: any;
-  };
-
   /**
    * Acts a subset of the `FilterBarDelegate` that can be used in {@link module:sap/ui/mdc/TableDelegate.getFilterDelegate TableDelegate.getFilterDelegate }
    * or {@link module:sap/ui/mdc/ChartDelegate.getFilterDelegate Chart.getFilterDelegate} to enable inbuilt
@@ -4830,10 +4819,8 @@ declare module "sap/ui/mdc/Chart" {
      * Gets current value of property {@link #getDelegate delegate}.
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/ChartDelegate ChartDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -5165,10 +5152,8 @@ declare module "sap/ui/mdc/Chart" {
      * Sets a new value for property {@link #getDelegate delegate}.
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/ChartDelegate ChartDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -5533,10 +5518,8 @@ declare module "sap/ui/mdc/Chart" {
 
     /**
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/ChartDelegate ChartDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -7786,8 +7769,7 @@ declare module "sap/ui/mdc/Control" {
   export interface $ControlSettings extends $ControlSettings1 {
     /**
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
+     *  The object has the following properties:
      * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
@@ -8009,8 +7991,7 @@ declare module "sap/ui/mdc/Element" {
   export interface $ElementSettings extends $ElementSettings1 {
     /**
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
+     *  The object has the following properties:
      * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
@@ -13502,17 +13483,13 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
 
   import InvisibleText from "sap/ui/core/InvisibleText";
 
-  import { MessageType, ID } from "sap/ui/core/library";
-
-  import Message from "sap/ui/core/message/Message";
-
   import FilterBarValidationStatus from "sap/ui/mdc/enums/FilterBarValidationStatus";
 
   import FilterField from "sap/ui/mdc/FilterField";
 
   import ElementMetadata from "sap/ui/core/ElementMetadata";
 
-  import Message1 from "sap/ui/core/Message";
+  import { ID } from "sap/ui/core/library";
 
   import VariantManagement from "sap/ui/fl/variants/VariantManagement";
 
@@ -13611,28 +13588,6 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
        */
       oInvisibleText: InvisibleText
     ): void;
-    /**
-     * Adds a message to the {@link sap.ui.model.message.MessageModel MessageModel} for a `propertyKey`. The
-     * message is displayed on the corresponding {@link sap.ui.mdc.FilterField FilterField}.
-     *
-     * @since 1.147
-     *
-     * @returns The created message object
-     */
-    addMessage(
-      /**
-       * The `propertyKey` of the {@link sap.ui.mdc.FilterField FilterField}
-       */
-      sPropertyKey: string,
-      /**
-       * The message text
-       */
-      sMessage: string,
-      /**
-       * The message type
-       */
-      sMessageType: MessageType | keyof typeof MessageType
-    ): Message;
     /**
      * Attaches event handler `fnFunction` to the {@link #event:filtersChanged filtersChanged} event of this
      * `sap.ui.mdc.filterbar.FilterBarBase`.
@@ -13879,10 +13834,8 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
      * Gets current value of property {@link #getDelegate delegate}.
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/FilterBarDelegate FilterBarDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -13940,19 +13893,6 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
      * @returns Value of property `liveMode`
      */
     getLiveMode(): boolean;
-    /**
-     * Returns all messages associated with the given `propertyKey` from the {@link sap.ui.model.message.MessageModel MessageModel}.
-     *
-     * @since 1.147
-     *
-     * @returns Array of messages for the given `propertyKey`
-     */
-    getMessages(
-      /**
-       * The `propertyKey` of the {@link sap.ui.mdc.FilterField FilterField}
-       */
-      sPropertyKey: string
-    ): Message[];
     /**
      * Gets the value of the basic search condition.
      *
@@ -14031,30 +13971,6 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
      */
     initializedWithMetadata(): Promise<any>;
     /**
-     * Removes a given message from the {@link sap.ui.model.message.MessageModel MessageModel}. The message
-     * is removed from the corresponding {@link sap.ui.mdc.FilterField FilterField}.
-     *
-     * @since 1.147
-     */
-    removeMessage(
-      /**
-       * The message to remove
-       */
-      oMessage: Message1
-    ): void;
-    /**
-     * Removes all messages for the given `propertyKey` from the {@link sap.ui.model.message.MessageModel MessageModel}.
-     * Clears the messages from the corresponding {@link sap.ui.mdc.FilterField FilterField}.
-     *
-     * @since 1.147
-     */
-    removeMessages(
-      /**
-       * The `propertyKey` of the {@link sap.ui.mdc.FilterField FilterField}
-       */
-      sPropertyKey: string
-    ): void;
-    /**
      * Sets the aggregated {@link #getBasicSearchField basicSearchField}.
      *
      *
@@ -14070,10 +13986,8 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
      * Sets a new value for property {@link #getDelegate delegate}.
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/FilterBarDelegate FilterBarDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -14227,10 +14141,8 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
   export interface $FilterBarBaseSettings extends $ControlSettings {
     /**
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
-     *  The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
-     * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/FilterBarDelegate FilterBarDelegate}.
-     *
+     *  The object has the following properties:
+     * 	 - `name` defines the path to the `Delegate` module
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
      *      Sample delegate object:
      * ```javascript
@@ -14286,8 +14198,8 @@ declare module "sap/ui/mdc/filterbar/FilterBarBase" {
      * aggregation) should be specified here, rather than in the `FilterField` configuration.
      *  **Note**: This property must not be bound.
      *  **Node**: Please check {@link sap.ui.mdc.filterbar.PropertyInfo} for more information about the supported
-     * inner elements. **Note**: Existing properties (set via {@link #setPropertyInfo setPropertyInfo}) must
-     * not be removed and their attributes must not be changed during the {@link module:sap/ui/mdc/FilterBarDelegate.fetchProperties fetchProperties }
+     * inner elements. **Note**: Existing properties (set via `sap.ui.mdc.filterbar.FilterBarBase#setPropertyInfo`)
+     * must not be removed and their attributes must not be changed during the {@link module:sap/ui/mdc/FilterBarDelegate.fetchProperties fetchProperties }
      * callback. Otherwise validation errors might occur whenever personalization-related control features (such
      * as the opening of any personalization dialog) are activated.
      *
@@ -18176,8 +18088,7 @@ declare module "sap/ui/mdc/Table" {
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
      *
-     * The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
+     * The object has the following properties:
      * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/TableDelegate TableDelegate}.
      *
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
@@ -18738,8 +18649,7 @@ declare module "sap/ui/mdc/Table" {
      *
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
      *
-     * The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
+     * The object has the following properties:
      * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/TableDelegate TableDelegate}.
      *
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
@@ -19415,8 +19325,7 @@ declare module "sap/ui/mdc/Table" {
     /**
      * Object related to the `Delegate` module that provides the required APIs to execute model-specific logic.
      *
-     * The object has the following properties (see {@link sap.ui.mdc.DelegateConfig DelegateConfig}):
-     *
+     * The object has the following properties:
      * 	 - `name` defines the path to the `Delegate` module. The used delegate module must inherit from {@link module:sap/ui/mdc/TableDelegate TableDelegate}.
      *
      * 	 - `payload` (optional) defines application-specific information that can be used in the given delegate
@@ -23344,7 +23253,7 @@ declare module "sap/ui/mdc/util/PropertyHelper" {
     visible?: boolean;
     /**
      * Key of the group in which the property is located. Used to visually group properties in personalization
-     * dialogs. The group with the `basic` key is always shown as the first group.
+     * dialogs.
      */
     group?: string;
     /**

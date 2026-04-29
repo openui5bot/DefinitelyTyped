@@ -1,4 +1,4 @@
-// For Library Version: 1.147.0
+// For Library Version: 1.145.0
 
 declare module "sap/ui/fl/library" {}
 
@@ -1545,8 +1545,6 @@ declare namespace sap {
 
     "sap/ui/fl/apply/_internal/changes/descriptor/ovp/DeleteCard": undefined;
 
-    "sap/ui/fl/apply/_internal/changes/descriptor/platform/SetUI5VersionNumber": undefined;
-
     "sap/ui/fl/apply/_internal/changes/descriptor/Registration": undefined;
 
     "sap/ui/fl/apply/_internal/changes/descriptor/RegistrationBuild": undefined;
@@ -1663,8 +1661,6 @@ declare namespace sap {
 
     "sap/ui/fl/initial/_internal/connectors/Utils": undefined;
 
-    "sap/ui/fl/initial/_internal/FlexConfiguration": undefined;
-
     "sap/ui/fl/initial/_internal/preprocessors/ComponentLifecycleHooks": undefined;
 
     "sap/ui/fl/initial/_internal/preprocessors/ControllerExtension": undefined;
@@ -1739,8 +1735,6 @@ declare namespace sap {
 
     "sap/ui/fl/write/_internal/connectors/SessionStorageConnector": undefined;
 
-    "sap/ui/fl/write/_internal/connectors/SupportLocalStorageConnector": undefined;
-
     "sap/ui/fl/write/_internal/connectors/Utils": undefined;
 
     "sap/ui/fl/write/_internal/fieldExtensibility/ABAPExtensibilityVariant": undefined;
@@ -1772,8 +1766,6 @@ declare namespace sap {
     "sap/ui/fl/write/api/ContextSharingAPI": undefined;
 
     "sap/ui/fl/write/api/ControlPersonalizationWriteAPI": undefined;
-
-    "sap/ui/fl/write/api/ControlVariantWriteAPI": undefined;
 
     "sap/ui/fl/write/api/FeaturesAPI": undefined;
 
